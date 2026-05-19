@@ -1,0 +1,1065 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    
+    <link href="https://files.realpython.com" rel="preconnect">
+
+    <title>Intro to Continuous Integration (Video) – Real Python</title>
+    <meta name="author" content="Real Python">
+    <meta name="description" content="Hello, and welcome to the Real Python guide to Continuous Integration with Python. In this set of videos, you’re going to learn the core concepts and benefits behind continuous integration. Next, you’ll set up your own continuous integration…">
+    <meta name="keywords" content="">
+
+    
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+
+    
+      <link rel="stylesheet" href="/static/realpython.min.faf04d03cd2c.css">
+      
+      <link rel="stylesheet" href="/static/gfonts/font.5ac42994de49.css">
+      <link rel="preload" href="/static/glightbox.min.9b438b29cef1.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/static/glightbox.min.9b438b29cef1.css"></noscript>
+      
+        <link rel="stylesheet" href="/static/animate.min.c0be8e53226a.css">
+      
+    
+
+    
+
+    
+    
+      <link rel="canonical" href="https://realpython.com/videos/intro-continuous-integration/">
+
+      
+      
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:image" content="https://files.realpython.com/media/Continuous-Integration-for-Python_Watermarked.6716094db5fe.jpg">
+        <meta property="og:image" content="https://files.realpython.com/media/Continuous-Integration-for-Python_Watermarked.6716094db5fe.jpg">
+        <meta name="robots" content="max-image-preview:large">
+      
+      <meta name="twitter:creator" content="@realpython">
+      <meta name="twitter:site" content="@realpython">
+      <meta property="og:title" content="Intro to Continuous Integration – Real Python">
+      <meta property="og:type" content="video.episode">
+      <meta property="og:url" content="https://realpython.com/videos/intro-continuous-integration/">
+      <meta property="og:description" content="Hello, and welcome to the Real Python guide to Continuous Integration with Python. In this set of videos, you’re going to learn the core concepts and benefits behind continuous integration. Next, you’ll set up your own continuous integration…">
+    
+
+    <link href="/static/favicon.68cbf4197b0c.png" rel="icon">
+    <link href="https://realpython.com/atom.xml" rel="alternate" title="Real Python" type="application/atom+xml">
+    <link rel="manifest" href="/manifest.json">
+
+    
+
+    
+    
+
+    
+    <script id="icons-data" type="application/json">{"iconsUrl": "/static/icons.ea74988d8a7e.svg"}</script>
+    <script id="optins-data" type="application/json">{"turnstileSiteKey": "0x4AAAAAAAQQUCLRXBi8NnUh"}</script>
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L7L6L5F6Y6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L7L6L5F6Y6',{'content_group': 'course'});
+
+  gtag('get', 'G-L7L6L5F6Y6', 'client_id', (clid) => {
+    document.cookie = 'gaclid=' + clid + ';max-age=86400000;path=/;secure';
+  });
+  
+</script>
+
+  </head>
+  <body data-authenticated="true">
+    
+      
+        
+
+
+
+  
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark flex-column  user-select-none">
+  <div class="container flex-row">
+
+    <a class="navbar-brand" href="/">
+      <img src="/static/real-python-logo.893c30edea53.svg" width="165" height="40" class="d-inline-block align-top" alt="Real Python">
+    </a>
+
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarSupportedContent" role="navigation" aria-label="Main Navigation">
+
+      <ul class="navbar-nav mr-2">
+
+        <li class="nav-item">
+          <a class="nav-link rounded" href="/start-here/">Start&nbsp;Here</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link rounded dropdown-toggle" href="#" id="navbarDropdownLibrary" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#brands--python"/></svg></span> Learn Python
+          </a>
+          <div class="dropdown-menu dropdown-menu-mega" aria-labelledby="navbarDropdownLibrary">
+            <div class="dropdown-mega-row">
+              <div class="dropdown-mega-col">
+                <div class="dropdown-mega-section">
+                  <h6 class="dropdown-mega-header">Start Learning</h6>
+                  
+<a class="dropdown-item d-flex align-items-center " href="/account/onboarding/plan/" style="line-height: 110%;"><span class="d-inline-flex align-items-center justify-content-center rounded flex-shrink-0 mr-2 bg-pastel-yellow text-pastel-yellow" style="width: 2rem; height: 2rem; font-size: 0.9rem;"><span class="icon" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--book-sparkles"/></svg></span></span><span class="flex-grow-1" style="min-width: 0; line-height: 0.985;"><span class="d-flex align-items-center justify-content-between"><span>Your Learning Plan&nbsp;→</span></span><small class="text-white-50">Your personalized Python learning plan</small></span></a>
+
+                  
+<a class="dropdown-item d-flex align-items-center " href="/search?kind=article&kind=course&order=newest" style="line-height: 110%;"><span class="d-inline-flex align-items-center justify-content-center rounded flex-shrink-0 mr-2 bg-pastel-yellow text-pastel-yellow" style="width: 2rem; height: 2rem; font-size: 0.9rem;"><span class="icon" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--graduation-cap"/></svg></span></span><span class="flex-grow-1" style="min-width: 0; line-height: 0.985;"><span class="d-flex align-items-center justify-content-between"><span>Python Tutorials&nbsp;→</span></span><small class="text-white-50">In-depth articles and video courses</small></span></a>
+
+                  
+<a class="dropdown-item d-flex align-items-center " href="/learning-paths/" style="line-height: 110%;"><span class="d-inline-flex align-items-center justify-content-center rounded flex-shrink-0 mr-2 bg-pastel-yellow text-pastel-yellow" style="width: 2rem; height: 2rem; font-size: 0.9rem;"><span class="icon" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#@learning-path"/></svg></span></span><span class="flex-grow-1" style="min-width: 0; line-height: 0.985;"><span class="d-flex align-items-center justify-content-between"><span>Learning Paths&nbsp;→</span></span><small class="text-white-50">Guided study plans for accelerated learning</small></span></a>
+
+                </div>
+                <div class="dropdown-mega-section">
+                  <h6 class="dropdown-mega-header">Practice</h6>
+                  
+<a class="dropdown-item d-flex align-items-center " href="/search?kind=exercise&kind=quiz" style="line-height: 110%;"><span class="d-inline-flex align-items-center justify-content-center rounded flex-shrink-0 mr-2 bg-pastel-blue text-pastel-blue" style="width: 2rem; height: 2rem; font-size: 0.9rem;"><span class="icon" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#@quiz"/></svg></span></span><span class="flex-grow-1" style="min-width: 0; line-height: 0.985;"><span class="d-flex align-items-center justify-content-between"><span>Quizzes & Exercises&nbsp;→</span></span><small class="text-white-50">Check your learning progress</small></span></a>
+
+                  
+<a class="dropdown-item d-flex align-items-center " href="/tutorials/all/" style="line-height: 110%;"><span class="d-inline-flex align-items-center justify-content-center rounded flex-shrink-0 mr-2 bg-pastel-blue text-pastel-blue" style="width: 2rem; height: 2rem; font-size: 0.9rem;"><span class="icon" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#@category"/></svg></span></span><span class="flex-grow-1" style="min-width: 0; line-height: 0.985;"><span class="d-flex align-items-center justify-content-between"><span>Browse Topics&nbsp;→</span></span><small class="text-white-50">Focus on a specific area or skill level</small></span></a>
+
+                  
+<a class="dropdown-item d-flex align-items-center " href="/ref/" style="line-height: 110%;"><span class="d-inline-flex align-items-center justify-content-center rounded flex-shrink-0 mr-2 bg-pastel-blue text-pastel-blue" style="width: 2rem; height: 2rem; font-size: 0.9rem;"><span class="icon" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#@reference"/></svg></span></span><span class="flex-grow-1" style="min-width: 0; line-height: 0.985;"><span class="d-flex align-items-center justify-content-between"><span>Reference&nbsp;→</span></span><small class="text-white-50">Concise definitions for common Python terms</small></span></a>
+
+                </div>
+              </div>
+              <div class="dropdown-mega-col">
+                <div class="dropdown-mega-section">
+                  <h6 class="dropdown-mega-header">Get Help</h6>
+                  
+<a class="dropdown-item d-flex align-items-center " href="/mentor/" style="line-height: 110%;"><span class="d-inline-flex align-items-center justify-content-center rounded flex-shrink-0 mr-2 bg-pastel-red text-pastel-red" style="width: 2rem; height: 2rem; font-size: 0.9rem;"><span class="icon" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#@code-mentor"/></svg></span></span><span class="flex-grow-1" style="min-width: 0; line-height: 0.985;"><span class="d-flex align-items-center justify-content-between"><span>Code Mentor&nbsp;→</span><span class="badge badge-pill badge-indigo ml-2">Beta</span></span><small class="text-white-50">Personalized code assistance &amp; learning tools</small></span></a>
+
+                  
+<a class="dropdown-item d-flex align-items-center " href="/office-hours/" style="line-height: 110%;"><span class="d-inline-flex align-items-center justify-content-center rounded flex-shrink-0 mr-2 bg-pastel-red text-pastel-red" style="width: 2rem; height: 2rem; font-size: 0.9rem;"><span class="icon" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--users"/></svg></span></span><span class="flex-grow-1" style="min-width: 0; line-height: 0.985;"><span class="d-flex align-items-center justify-content-between"><span>Office Hours&nbsp;→</span></span><small class="text-white-50">Live Q&A calls with Python experts</small></span></a>
+
+                  
+<a class="dropdown-item d-flex align-items-center " href="/community/" style="line-height: 110%;"><span class="d-inline-flex align-items-center justify-content-center rounded flex-shrink-0 mr-2 bg-pastel-red text-pastel-red" style="width: 2rem; height: 2rem; font-size: 0.9rem;"><span class="icon" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--message-smile"/></svg></span></span><span class="flex-grow-1" style="min-width: 0; line-height: 0.985;"><span class="d-flex align-items-center justify-content-between"><span>Community Chat&nbsp;→</span></span><small class="text-white-50">Learn with other Pythonistas</small></span></a>
+
+                </div>
+                <div class="dropdown-mega-section">
+                  <h6 class="dropdown-mega-header">Go Deeper</h6>
+                  
+<a class="dropdown-item d-flex align-items-center " href="/live/" style="line-height: 110%;"><span class="d-inline-flex align-items-center justify-content-center rounded flex-shrink-0 mr-2 bg-pastel-violet text-pastel-violet" style="width: 2rem; height: 2rem; font-size: 0.9rem;"><span class="icon" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--rocket-launch"/></svg></span></span><span class="flex-grow-1" style="min-width: 0; line-height: 0.985;"><span class="d-flex align-items-center justify-content-between"><span>Live Courses&nbsp;→</span></span><small class="text-white-50">Live, instructor-led Python courses</small></span></a>
+
+                  
+<a class="dropdown-item d-flex align-items-center " href="/products/books/" style="line-height: 110%;"><span class="d-inline-flex align-items-center justify-content-center rounded flex-shrink-0 mr-2 bg-pastel-violet text-pastel-violet" style="width: 2rem; height: 2rem; font-size: 0.9rem;"><span class="icon" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--book-heart"/></svg></span></span><span class="flex-grow-1" style="min-width: 0; line-height: 0.985;"><span class="d-flex align-items-center justify-content-between"><span>Books&nbsp;→</span></span><small class="text-white-50">Round out your knowledge and learn offline</small></span></a>
+
+                  
+<a class="dropdown-item d-flex align-items-center " href="/podcasts/rpp/" style="line-height: 110%;"><span class="d-inline-flex align-items-center justify-content-center rounded flex-shrink-0 mr-2 bg-pastel-violet text-pastel-violet" style="width: 2rem; height: 2rem; font-size: 0.9rem;"><span class="icon" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#@podcast"/></svg></span></span><span class="flex-grow-1" style="min-width: 0; line-height: 0.985;"><span class="d-flex align-items-center justify-content-between"><span>Podcast&nbsp;→</span></span><small class="text-white-50">Hear what’s new in the world of Python</small></span></a>
+
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link rounded dropdown-toggle" href="#" id="navbarDropdownMore" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            More
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMore">
+            <a class="dropdown-item" href="/learner-stories/">Learner Stories</a>
+            <a class="dropdown-item" href="/newsletter/">Python Newsletter</a>
+            <a class="dropdown-item" href="https://www.pythonjobshq.com" target="_blank">Python Job Board</a>
+            <a class="dropdown-item" href="/team/">Meet the Team</a>
+            <a class="dropdown-item" href="/jobs/">Become a Contributor</a>
+          </div>
+        </li>
+
+      </ul> 
+
+      
+      <div class="d-block d-lg-none"> 
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link rounded" href="/search" title="Search"><span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#v4--search"/></svg></span> Search</a>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="d-none d-lg-flex align-items-center mr-2 flex-fill">
+        <form class="form-inline w-100 position-relative" action="/search" method="get">
+          <a class="js-search-form-submit position-absolute" href="/search" title="Search" aria-hidden="true" tabindex="-1"><span class="icon baseline text-muted pl-2" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#v4--search"/></svg></span></a>
+          <input class="search-autocomplete search-field form-control form-control-md mr-sm-1 mr-lg-2 w-100" style="padding-left: 2rem;" maxlength=50 type="search" placeholder="Search" aria-label="Search" aria-keyshortcuts="/ Control+J Meta+J" name="q" autocomplete="off">
+          <span class="search-hotkey-indicator position-absolute px-2 border border-input text-input rounded small user-select-none" style="right: 1em;" title="Press / (forward slash) or Ctrl+J to open search" aria-hidden="true">/</span>
+          <input type="hidden" name="_from" value="nav">
+        </form>
+      </div>
+      
+
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+          <li class="nav-item dropdown">
+            <a class="nav-link rounded dropdown-toggle  p-2 m-0" href="#" id="navbarDropdownMyAccount" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img class="rounded-circle ml-2 ml-lg-0" style="width: 45px; height: 45px;" width="500" height="500" src="https://www.gravatar.com/avatar/842e2bd95c7cd0bec8459ef590c48ed6?s=500&amp;d=mp" loading="lazy" alt="User avatar">
+              <span class="notifications-indicator-container">
+                <span class="notifications-indicator notifications-indicator-visible"></span>
+              </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMyAccount">
+              
+
+
+  
+    <a class="dropdown-item" href="/account/notifications/"><span class="icon baseline mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--bell"/></svg></span>Notifications <span class="badge badge-pill badge-danger">3</span></a>
+  
+
+
+<a class="dropdown-item" href="/account/"><span class="icon baseline mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--sliders"/></svg></span>Manage Account</a>
+
+
+  <a class="dropdown-item" href="/account/referrals/?from=account_nav"><span class="icon baseline mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--user-group"/></svg></span>Refer a Friend</a>
+
+
+<a class="dropdown-item" href="/search?status=in-progress&order=recent"><span class="icon baseline mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#@continue-learning"/></svg></span>Continue Learning</a>
+
+
+  <a class="dropdown-item" href="/account/onboarding/plan/"><span class="icon baseline mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--book-sparkles"/></svg></span>Learning Plan</a>
+
+
+<a class="dropdown-item" href="/account/bookmarks/"><span class="icon baseline mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--bookmark"/></svg></span>Bookmarks</a>
+
+<a class="dropdown-item" href="/certificates/"><span class="icon baseline mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#@certificate"/></svg></span>Certificates</a>
+
+<a class="dropdown-item" href="/account/purchases/"><span class="icon baseline mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--cart-shopping"/></svg></span>Purchases</a>
+
+
+  <a class="dropdown-item" href="https://support.realpython.com/"><span class="icon baseline mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--circle-question"/></svg></span>Support</a>
+
+
+
+
+<a class="dropdown-item" href="/account/logout/"><span class="icon baseline mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--right-from-bracket"/></svg></span>Sign Out</a>
+
+            </div>
+          </li>
+        
+      </ul>
+
+    
+    </div>
+
+  </div>
+
+  
+
+</nav>
+
+      
+    
+
+     
+
+    <main class="container main-content">
+      
+
+      
+  
+
+
+<lesson-detail
+  data-autoplay="true"
+  data-next-lesson-url="/videos/setting-your-python-ci-project/"
+  data-should-report-progress="true"
+  data-progress-url="/api/v1/lessons/intro-continuous-integration/progress/"
+  data-update-profile-toggle-url="/account/update/profile_toggle/"
+  data-account-settings-url="/account/">
+
+  
+
+
+
+<lesson-player
+  data-can-access="true"
+  data-has-video="true"
+  
+    data-video-id="336891663"
+    data-video-url="https://player.vimeo.com/video/336891663?"
+  
+  data-video-quality="auto"
+  data-video-subtitles-language=""
+  data-video-playback-speed="1.0"
+  data-autoplay="true"
+  data-is-final-lesson="false">
+
+  
+
+  <div class="jsVideoContainer embed-responsive embed-responsive-16by9 rounded bg-white mb-3">
+
+    
+      
+      <div class="player-controls user-select-none visible-hover" data-target-player-controls>
+        <button class="btn btn-dark border-0 mt-1 d-none ml-1" title="Theater mode [t]" aria-label="Theater mode [t]" data-toggle="tooltip" data-placement="bottom" data-target-expand-player-button><span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#regular--rectangle"/></svg></span></button>
+        <button class="btn btn-dark border-0 mt-1 d-none" title="Fullscreen [f]" aria-label="Fullscreen [f]" data-toggle="tooltip" data-placement="bottom" data-target-enter-fullscreen-button><span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#regular--expand"/></svg></span></button>
+
+        <button class="btn btn-lg btn-dark border-0 rounded player-control--no-corners d-none" title="Exit fullscreen mode" aria-label="Exit fullscreen mode" data-target-exit-fullscreen-button><span class="icon baseline mr-2" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#regular--arrow-down-left-and-arrow-up-right-to-center"/></svg></span>Exit&nbsp;Fullscreen</button>
+      </div>
+
+      
+      <lesson-player-endscreen
+        
+        data-feedback-liked-url="/feedback/survey/course/python-continuous-integration/liked/?from=endscreen"
+        data-feedback-disliked-url="/feedback/survey/course/python-continuous-integration/disliked/?from=endscreen">
+      </lesson-player-endscreen>
+
+      
+      <div class="embed-responsive-item d-flex justify-content-center align-items-center fade-in" data-target-video-loading-indicator>
+        <div class="spinner-border text-muted" role="status">
+          <span class="sr-only">Loading video player&hellip;</span>
+        </div>
+      </div>
+
+      
+    
+  </div>
+
+   
+
+  
+
+</lesson-player>
+
+
+  <div data-target-notices></div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-11 col-lg-8 article">
+      <div>
+
+        <h1 class="text-wrap-pretty">Intro to Continuous Integration</h1>
+
+        
+
+<div class="container mb-3">
+  <div class="row">
+
+    
+    <div class="col-2 col-md-1 p-0 align-self-center">
+      
+        <a href="/courses/python-continuous-integration/#team"><img src="/cdn-cgi/image/width=1361,height=1361,fit=crop,gravity=auto,format=auto/https://files.realpython.com/media/century.d2e9b3c6afef.jpg" srcset="/cdn-cgi/image/width=340,height=340,fit=crop,gravity=auto,format=auto/https://files.realpython.com/media/century.d2e9b3c6afef.jpg 340w, /cdn-cgi/image/width=453,height=453,fit=crop,gravity=auto,format=auto/https://files.realpython.com/media/century.d2e9b3c6afef.jpg 453w, /cdn-cgi/image/width=680,height=680,fit=crop,gravity=auto,format=auto/https://files.realpython.com/media/century.d2e9b3c6afef.jpg 680w, /cdn-cgi/image/width=1361,height=1361,fit=crop,gravity=auto,format=auto/https://files.realpython.com/media/century.d2e9b3c6afef.jpg 1361w" sizes="(min-width: 1200px) 58px, (min-width: 780px) calc(-0.5vw + 57px), (min-width: 580px) 85px, calc(16.54vw - 5px)" class="rounded-circle img-fluid w-100 mb-0" width="500" height="500" alt="Joe Tatusko"></a>
+      
+    </div>
+
+    <div class="col pr-0 ml-3 d-flex align-items-center text-muted">
+
+      
+      <div class="row text-wrap-pretty">
+        <strong><a class="text-muted" href="/courses/python-continuous-integration/">Continuous Integration With Python</a></strong>
+        <span class="w-100">
+          
+            <a class="text-muted" href="/courses/python-continuous-integration/#team">Joe Tatusko</a>
+          
+          
+            <span class="icon baseline ml-2" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#@duration"/></svg></span> 02:00
+          
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+        <div class="mb-4">
+          <div class="btn-group my-1 mr-1">
+            
+
+<div hx-ext="path-deps" id="jsCompletionButton" class="jsLessonCompletionStatus" hx-get="/api/v1/lessons/intro-continuous-integration/completion_status/" hx-trigger="refresh-completion-status" hx-swap="outerHTML" hx-on::load="markedInProgress()">
+  
+    <button id="jsIsInProgress" title="Mark lesson as completed" class="btn btn-secondary border-right" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" hx-target="#jsCompletionButton" hx-swap="outerHTML" hx-post="/api/v1/lessons/intro-continuous-integration/completion_status/?completed=1">Mark as Completed</button>
+  
+</div>
+
+            
+
+
+  <button title="Add bookmark" class="btn btn-secondary border-left" hx-swap="outerHTML" hx-post="/api/v1/lessons/intro-continuous-integration/bookmark/?bookmarked=1"><span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#light--bookmark"/></svg></span></button>
+
+
+          </div>
+
+          
+            
+
+<span class="dropdown mr-1 my-1">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="supportingMaterialButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Supporting Material</button>
+  <div class="dropdown-menu bg-light" aria-labelledby="supportingMaterialButton">
+    
+      
+        <a class="dropdown-item text-body bg-light" target="_blank" href="/python-continuous-integration/"><span class="icon baseline mr-2" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--book-heart"/></svg></span>Recommended Tutorial</a>
+      
+    
+      
+        <a class="dropdown-item text-body bg-light" target="_blank" href="/courses/python-continuous-integration/downloads/continuous-integration-code/"><span class="icon baseline mr-2" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#@download"/></svg></span>Sample Code (.zip)</a>
+      
+    
+    <a class="dropdown-item text-body bg-light"  href="#discussion"><span class="icon baseline mr-2" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--comment-question"/></svg></span>Ask a Question</a>
+  </div>
+</span>
+
+          
+
+          
+
+
+
+<div class="btn-group mb-0 mr-1">
+  <a class="btn btn-secondary border-right" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" title="Liked it" role="button" aria-label="Liked it (thumbs up)" href="/feedback/survey/course/python-continuous-integration/liked/?from=lesson-title" target="_blank"><span class="icon" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#light--thumbs-up"/></svg></span></a> 
+  <a class="btn btn-secondary border-left" role="button" aria-label="Disliked it (thumbs down)" title="Disliked it" href="/feedback/survey/course/python-continuous-integration/disliked/?from=lesson-title" target="_blank"><span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#light--thumbs-down"/></svg></span></a>
+</div>
+
+
+          
+
+
+
+
+
+<share-button
+  url="https://realpython.com/videos/intro-continuous-integration/"
+  
+  
+  
+  
+  
+>
+  <button class="btn btn-secondary my-1" type="button" title="Share" aria-label="Share"><span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#@share-light"/></svg></span></button>
+</share-button>
+
+        </div>
+
+        
+
+
+
+
+
+
+
+
+
+<ul class="nav nav-tabs" role="tablist">
+  
+    <li class="nav-item">
+      <a class="nav-link tab-header-nav-link link-unstyled text-body user-select-none active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Contents</a>
+    </li>
+  
+    <li class="nav-item">
+      <a class="nav-link tab-header-nav-link link-unstyled text-body user-select-none" id="transcript-tab" data-toggle="tab" href="#transcript" role="tab" aria-controls="transcript" aria-selected="false"><span class="icon baseline text-muted mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--subtitles"/></svg></span>Transcript</a>
+    </li>
+  
+    <li class="nav-item">
+      <a class="nav-link tab-header-nav-link link-unstyled text-body user-select-none" id="discussion-tab" data-toggle="tab" href="#discussion" role="tab" aria-controls="discussion" aria-selected="false"><span class="icon baseline text-muted mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--comments"/></svg></span>Discussion</a>
+    </li>
+  
+</ul>
+
+
+<div class="tab-content">
+  
+    <div class="tab-pane fade active show my-3 article-body" id="description" role="tabpanel" aria-labelledby="description-tab" style="min-height: 300px">
+      
+    <p>In this first video of the course, you&rsquo;ll get an overview about the courses content as well as a basic definition of Continuous Integration (CI).
+During this course you will work with Python as programming language and CircleCI as CI platform.</p>
+<div class="container border rounded mb-3">
+  <div class="row my-3">
+    <div class="col">
+      <span class="small text-muted"><span class="icon baseline mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#@download"/></svg></span><strong>Download</strong></span>
+      <a class="stretched-link" href="/courses/python-continuous-integration/downloads/continuous-integration-code/" target="_blank"><p class="h2 my-0 h3">Sample Code (.zip)</p></a>
+      <span class="text-muted small">2.8 KB</span>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  
+    </div>
+  
+    <div class="tab-pane fade my-3" id="transcript" role="tabpanel" aria-labelledby="transcript-tab" style="min-height: 300px">
+      
+    
+    
+
+
+<lesson-transcript>
+  <div class="text-wrap-pretty">
+    
+
+
+<p>
+  
+    <a href="#t=0.63" data-video-timestamp-start="0.63" class="text-body js-video-timelink"><strong>00:00</strong></a>
+  
+  
+  <a href="#t=0.63" data-video-timestamp-start="0.63" data-video-timestamp-end="6.39" class="text-body js-video-timelink">Hello, and welcome to the Real Python guide to Continuous Integration with Python. In</a> <a href="#t=6.39" data-video-timestamp-start="6.39" data-video-timestamp-end="7.23" class="text-body js-video-timelink">this set of videos,</a> <a href="#t=7.38" data-video-timestamp-start="7.38" data-video-timestamp-end="10.47" class="text-body js-video-timelink">you’re going to learn the core concepts and benefits behind continuous</a> <a href="#t=10.47" data-video-timestamp-start="10.47" data-video-timestamp-end="15.24" class="text-body js-video-timelink">integration. Next, you’ll set up your own continuous integration pipeline.</a>
+</p>
+
+<p>
+  
+    <a href="#t=15.93" data-video-timestamp-start="15.93" class="text-body js-video-timelink"><strong>00:15</strong></a>
+  
+  
+  <a href="#t=15.93" data-video-timestamp-start="15.93" data-video-timestamp-end="16.763" class="text-body js-video-timelink">And finally,</a> <a href="#t=16.77" data-video-timestamp-start="16.77" data-video-timestamp-end="20.46" class="text-body js-video-timelink">you’ll use that continuous integration pipeline to manage a Python project.</a> <a href="#t=21.09" data-video-timestamp-start="21.09" data-video-timestamp-end="26.09" class="text-body js-video-timelink">So, what is continuous integration, or <em>CI</em>? Continuous integration is the practice of</a> <a href="#t=26.46" data-video-timestamp-start="26.46" data-video-timestamp-end="29.82" class="text-body js-video-timelink">frequently building and testing every change done to a piece of code,</a> <a href="#t=29.97" data-video-timestamp-start="29.97" data-video-timestamp-end="33.6" class="text-body js-video-timelink">and then integrating that code as often as possible. In the past,</a> <a href="#t=33.78" data-video-timestamp-start="33.78" data-video-timestamp-end="37.83" class="text-body js-video-timelink">changes were often built weeks apart, causing huge headaches and wasted time</a> <a href="#t=37.83" data-video-timestamp-start="37.83" data-video-timestamp-end="39.09" class="text-body js-video-timelink">when it came time to merge.</a>
+</p>
+
+<p>
+  
+    <a href="#t=39.87" data-video-timestamp-start="39.87" class="text-body js-video-timelink"><strong>00:39</strong></a>
+  
+  
+  <a href="#t=39.87" data-video-timestamp-start="39.87" data-video-timestamp-end="44.57" class="text-body js-video-timelink">Frequent builds means that any issues that arise can be traced back quickly and efficiently.</a> <a href="#t=44.87" data-video-timestamp-start="44.87" data-video-timestamp-end="49.5" class="text-body js-video-timelink">CI also involves all developers on a project working on the same repository of</a> <a href="#t=49.5" data-video-timestamp-start="49.5" data-video-timestamp-end="53.88" class="text-body js-video-timelink">code. While different teams and individuals may be on different branches of a repo,</a> <a href="#t=54.12" data-video-timestamp-start="54.12" data-video-timestamp-end="58.44" class="text-body js-video-timelink">they’re all working off the same master. This way, as changes are added,</a> <a href="#t=58.53" data-video-timestamp-start="58.53" data-video-timestamp-end="62.1" class="text-body js-video-timelink">all teams have access right away and can see how their code interacts with it.</a>
+</p>
+
+<p>
+  
+    <a href="#t=62.88" data-video-timestamp-start="62.88" class="text-body js-video-timelink"><strong>01:02</strong></a>
+  
+  
+  <a href="#t=62.88" data-video-timestamp-start="62.88" data-video-timestamp-end="64.83" class="text-body js-video-timelink">Git is a common version control system,</a> <a href="#t=64.92" data-video-timestamp-start="64.92" data-video-timestamp-end="67.29" class="text-body js-video-timelink">and you’ll be using GitHub later on for the example.</a> <a href="#t=68.28" data-video-timestamp-start="68.28" data-video-timestamp-end="73.17" class="text-body js-video-timelink">A big piece of a CI pipeline is automating building and testing. Since Python is</a> <a href="#t=73.17" data-video-timestamp-start="73.17" data-video-timestamp-end="75.33" class="text-body js-video-timelink">interpreted and doesn’t need to be compiled,</a> <a href="#t=75.51" data-video-timestamp-start="75.51" data-video-timestamp-end="77.52" class="text-body js-video-timelink">we’re more concerned about the testing aspect,</a> <a href="#t=77.7" data-video-timestamp-start="77.7" data-video-timestamp-end="81.03" class="text-body js-video-timelink">but you can think of the build as pulling all the required dependencies for the</a> <a href="#t=81.03" data-video-timestamp-start="81.03" data-video-timestamp-end="84.36" class="text-body js-video-timelink">project. When testing is added to the CI pipeline,</a> <a href="#t=84.63" data-video-timestamp-start="84.63" data-video-timestamp-end="88.11" class="text-body js-video-timelink">you can ensure that a successful commit passes all defined tests,</a> <a href="#t=88.35" data-video-timestamp-start="88.35" data-video-timestamp-end="90.81" class="text-body js-video-timelink">even if the developer forgot to run the test locally.</a>
+</p>
+
+<p>
+  
+    <a href="#t=91.89" data-video-timestamp-start="91.89" class="text-body js-video-timelink"><strong>01:31</strong></a>
+  
+  
+  <a href="#t=91.89" data-video-timestamp-start="91.89" data-video-timestamp-end="96.36" class="text-body js-video-timelink">External services are often used to handle CI pipelines, as this eliminates any</a> <a href="#t=96.36" data-video-timestamp-start="96.36" data-video-timestamp-end="100.56" class="text-body js-video-timelink">specific conditions on an individual machine. In the examples section,</a> <a href="#t=100.62" data-video-timestamp-start="100.62" data-video-timestamp-end="102.78" class="text-body js-video-timelink">you’re going to learn how to use CircleCI,</a> <a href="#t=103.11" data-video-timestamp-start="103.11" data-video-timestamp-end="105.36" class="text-body js-video-timelink">which monitors a GitHub repo for changes</a> <a href="#t=105.87" data-video-timestamp-start="105.87" data-video-timestamp-end="108.93" class="text-body js-video-timelink">and then builds the project based on a configuration file that you provide.</a>
+</p>
+
+<p>
+  
+    <a href="#t=109.68" data-video-timestamp-start="109.68" class="text-body js-video-timelink"><strong>01:49</strong></a>
+  
+  
+  <a href="#t=109.68" data-video-timestamp-start="109.68" data-video-timestamp-end="113.19" class="text-body js-video-timelink">If this seems like a lot to take in, don’t worry. In the next section,</a> <a href="#t=113.25" data-video-timestamp-start="113.25" data-video-timestamp-end="116.73" class="text-body js-video-timelink">you’re going to set up your own continuous integration pipeline and things</a> <a href="#t=116.73" data-video-timestamp-start="116.73" data-video-timestamp-end="119.1" class="text-body js-video-timelink">should become clearer. So, let’s get started!</a>
+</p>
+
+
+  </div>
+</lesson-transcript>
+
+  
+    </div>
+  
+    <div class="tab-pane fade my-3" id="discussion" role="tabpanel" aria-labelledby="discussion-tab" style="min-height: 300px">
+      
+
+
+
+
+
+    
+
+
+
+<add-comment-form>
+  <div class="border rounded bg-light p-3">
+    
+      <p>You are commenting publicly as:</p>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-2 col-md-1 p-0 align-self-center">
+            <img loading="lazy" class="align-self-center rounded-circle img-fluid w-100" width="500" height="500" src="https://www.gravatar.com/avatar/842e2bd95c7cd0bec8459ef590c48ed6?s=500&amp;d=mp" alt="User avatar">
+          </div>
+          <div class="col pr-0 d-flex align-items-center">
+            <p><strong>alexmateus247</strong> <small>(<a href="/account/">change</a>)</small></p>
+          </div>
+        </div>
+      </div>
+
+      <form action="/comments/" method="post">
+        <input type="hidden" name="csrfmiddlewaretoken" value="ki150CRkqns8Ed5I0ZZFKn7C8dYGREF2x37ZHAIEFbaqnyR4pBD20yInKHvQcWHm">
+
+        
+          <input type="hidden" name="lesson_slug" value="intro-continuous-integration">
+        
+
+        <div class="form-group">
+          
+
+
+
+
+
+<comment-editor
+  data-preview-api-url="/comments/api/v1/preview/"
+  data-autosave-unique-id="lessons/intro-continuous-integration">
+
+  <textarea class="form-control" name="comment_text" placeholder="Type Your Comment Here (Markdown Supported)" rows="5" required></textarea>
+
+</comment-editor>
+
+        </div>
+
+        <div class="alert alert-dark my-3 text-wrap-pretty">
+          <p class="mb-0"><strong>Commenting Tips:</strong> The most useful comments are those written with the goal of learning from or helping out other students. <a href="https://realpython.com/python-beginner-tips/#tip-9-ask-good-questions" target="_blank">Get tips for asking good questions</a> and <a href="https://support.realpython.com" target="_blank">get answers to common questions in our support portal</a>.<hr>Looking for a real-time conversation? Visit the <a href="/community/" target="_blank">Real Python Community Chat</a> or join the next <a href="/office-hours/" target="_blank">&ldquo;Office&nbsp;Hours&rdquo; Live Q&A Session</a>. Happy Pythoning!</p>
+
+        </div>
+
+        <div class="text-right">
+          <button type="submit" class="btn btn-success text-wrap mb-0 mr-2 my-1" data-action-preview-comment>Preview Comment</button><span class="my-1 user-select-none d-none" data-target-edit-comment-wrapper>or<button class="btn btn-secondary border-dark text-wrap mb-0 ml-2" data-action-edit-comment>Edit Comment</button></span>
+        </div>
+
+      </form>
+    
+  </div>
+</add-comment-form>
+
+    </div>
+  
+</div>
+
+
+
+      </div>
+    </div>
+
+    <aside class="col-md-7 col-lg-4">
+      
+
+<p class="h3 text-center mt-1 mb-4">Course Contents</p>
+
+<div class="d-flex justify-content-between mb-4">
+  
+    
+    <div class="btn disabled mr-2" disabled aria-hidden="true"><span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#blank"/></svg></span></div>
+  
+  <a href="/courses/python-continuous-integration/" class="btn btn-outline-dark mr-2"><span class="icon baseline mr-1" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#regular--list"/></svg></span>Overview</a>
+  
+    <a href="/videos/setting-your-python-ci-project/" class="btn btn-outline-dark" aria-label="Go to Next Lesson"><span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#solid--angle-right"/></svg></span></a>
+  
+</div>
+
+
+      <div class="mb-4">
+        
+
+
+
+<div class="jsLessonCompletionStatus" hx-get="/api/v1/lessons/intro-continuous-integration/playlist/" hx-trigger="path-deps, refresh-completion-status" path-deps="/api/v1/lessons/intro-continuous-integration/completion_status/" hx-swap="outerHTML">
+
+<div class="progress mb-4">
+  <div class="progress-bar small bg-dark" title="Course progress" role="progressbar" style="width: 0%; min-width: 2.5em; cursor: default;" title="Course progress" aria-label="Course progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+</div>
+
+
+<ul class="list-group list-group-flush text-wrap-pretty" aria-label="Course sections and lessons">
+  
+    
+    
+
+    
+    <div class="list-group-item border-0 p-0">
+      <div id="section-76" class="collapse show">
+        
+
+          
+
+          
+
+          
+
+          
+
+          <a href="/videos/intro-continuous-integration/" class="list-group-item list-group-item-action rounded border-0 py-1 bg-light">
+    <div class="row small">
+      <div class="col-1 ml-0">
+        
+          
+            <span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#@play"/></svg></span>
+          
+        
+      </div>
+      <div class="col ">
+        Intro to Continuous Integration <span class="text-muted">02:00</span>
+      </div>
+    </div>
+  </a>
+        
+
+          
+
+          
+
+          
+
+          
+
+          <a href="/videos/setting-your-python-ci-project/" class="list-group-item list-group-item-action rounded border-0 py-1">
+    <div class="row small">
+      <div class="col-1 ml-0">
+        
+          
+            
+              <span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#v4--circle-thin"/></svg></span>
+            
+          
+        
+      </div>
+      <div class="col ">
+        Setting Up Your Python CI Project <span class="text-muted">03:20</span>
+      </div>
+    </div>
+  </a>
+        
+
+          
+
+          
+
+          
+
+          
+
+          <a href="/lessons/adding-unit-tests/" class="list-group-item list-group-item-action rounded border-0 py-1">
+    <div class="row small">
+      <div class="col-1 ml-0">
+        
+          
+            
+              <span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#v4--circle-thin"/></svg></span>
+            
+          
+        
+      </div>
+      <div class="col ">
+        Adding Unit Tests <span class="text-muted">04:24</span>
+      </div>
+    </div>
+  </a>
+        
+
+          
+
+          
+
+          
+
+          
+
+          <a href="/lessons/connecting-circleci/" class="list-group-item list-group-item-action rounded border-0 py-1">
+    <div class="row small">
+      <div class="col-1 ml-0">
+        
+          
+            
+              <span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#v4--circle-thin"/></svg></span>
+            
+          
+        
+      </div>
+      <div class="col ">
+        Connecting to CircleCI <span class="text-muted">05:04</span>
+      </div>
+    </div>
+  </a>
+        
+
+          
+
+          
+
+          
+
+          
+
+          <a href="/lessons/making-changes-and-triggering-automated-tests/" class="list-group-item list-group-item-action rounded border-0 py-1">
+    <div class="row small">
+      <div class="col-1 ml-0">
+        
+          
+            
+              <span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#v4--circle-thin"/></svg></span>
+            
+          
+        
+      </div>
+      <div class="col ">
+        Making Changes and Triggering Automated Tests <span class="text-muted">04:15</span>
+      </div>
+    </div>
+  </a>
+        
+
+          
+
+          
+
+          
+
+          
+
+          <a href="/lessons/continuous-integration-next-steps/" class="list-group-item list-group-item-action rounded border-0 py-1">
+    <div class="row small">
+      <div class="col-1 ml-0">
+        
+          
+            
+              <span class="icon baseline" aria-hidden="true"><svg aria-hidden="true"><use href="/static/icons.ea74988d8a7e.svg#v4--circle-thin"/></svg></span>
+            
+          
+        
+      </div>
+      <div class="col ">
+        Continuous Integration: Next Steps <span class="text-muted">02:08</span>
+      </div>
+    </div>
+  </a>
+         
+      </div>
+    </div>
+   
+</ul>
+
+
+</div>
+
+      </div>
+    </aside>
+
+  </div>
+</lesson-detail>
+
+
+      
+    </main>
+
+    
+    
+
+    
+    
+
+    
+      
+        <footer class="footer">
+  <div class="container">
+    <p class="text-center text-muted"><small>© 2012–2026 Real&nbsp;Python<span class="d-print-none"> ⋅ <a class="link-unstyled" href="/privacy-policy/">Privacy&nbsp;Policy</small></a></span>
+  </div>
+</footer>
+
+      
+    
+
+    
+
+    
+    <script>
+      (function() {
+        var isAndroid = navigator.userAgent.toLowerCase().indexOf("android") > -1;
+        if (!isAndroid) {
+          return;
+        }
+
+        var styles = `
+        @font-face {
+          font-family: 'DejaVu Sans Mono';
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+          src: url('/static/mfonts/dejavu-sans-mono.33f00225f915.woff2') format('woff2'),
+               url('/static/mfonts/dejavu-sans-mono.0da77d3739f3.woff') format('woff'),
+               url('/static/mfonts/dejavu-sans-mono.c2356fc49835.ttf') format('truetype');
+        }
+        code, kbd, pre, samp {
+          font-family: 'DejaVu Sans Mono', monospace;
+        }
+        `
+
+        var styleSheet = document.createElement("style")
+        styleSheet.type = "text/css"
+        styleSheet.innerText = styles
+        document.head.appendChild(styleSheet)
+      })();
+    </script>
+
+    
+    
+    <script src="/static/jquery.min.2c872dbe60f4.js"></script>
+    <script src="/static/popper.min.aeebb49d0b64.js"></script>
+    <script src="/static/bootstrap.min.248284cdd069.js"></script>
+
+    
+    
+  <script src="https://js.sentry-cdn.com/456c44c3787042febd783f4675183e6b.min.js" crossorigin="anonymous"></script>
+
+
+
+    <script>
+    (function() {
+      document.querySelectorAll(".js-search-form-submit").forEach(function(el) {
+        el.addEventListener("click", function(e) {
+          e.preventDefault();
+          e.currentTarget.parentElement.submit();
+        })
+      });
+    })();
+    </script>
+    <script src="/static/frontend/reader/lightbox.f55927df6c16.js" async></script>
+    <script src="/static/frontend/reader/platforms-ui.19d19aa199f0.js" async></script>
+    
+    <script src="/static/frontend/analytics/session.0c583bd26778.js" async></script>
+    
+
+    <script src="/static/frontend/previews/popover.67ce4da83bc0.js" async></script>
+
+    
+
+    
+
+
+
+
+    <script src="/static/frontend/videos/components/lesson-detail.3bef82c62b73.js" defer></script>
+<script src="/static/frontend/vendor/htmx.8e8ee90d111c.js" defer></script>
+<script src="/static/frontend/videos/components/lesson-player.baf5f21a9b5c.js" defer></script>
+<script src="/static/frontend/components/share-button.2b5e78e94c79.js" defer></script>
+<script src="/static/frontend/videos/components/lesson-transcript.5c539fc4db95.js" defer></script>
+<script src="/static/frontend/comments/components/add-comment-form.585ffedd326c.js" defer></script>
+<script src="/static/frontend/comments/components/comment-editor.0ab3a2efca4f.js" defer></script>
+<link rel="stylesheet" href="/static/easymde.min.734ec795b2b4.css">
+
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+  
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "Intro to Continuous Integration",
+    "description": "Hello, and welcome to the Real Python guide to Continuous Integration with Python. In this set of videos, you’re going to learn the core concepts and benefits behind continuous integration. Next, you’ll set up your own continuous integration…",
+    "thumbnailUrl": ["https://files.realpython.com/media/Continuous-Integration-for-Python_Watermarked.6716094db5fe.jpg"],
+    "uploadDate": "2019-05-28T14:00:00+00:00",
+    "duration": "PT2M0S",
+    "embedUrl": "https://player.vimeo.com/video/336891663",
+    "potentialAction": {
+      "@type": "SeekToAction",
+      "target": "https://realpython.com/videos/intro-continuous-integration/#t={seek_to_second_number}",
+      "startOffset-input": "required name=seek_to_second_number"
+    }
+  }
+  </script>
+  
+
+
+    <script src="/static/frontend/optins/optins.3e49fac3f0b0.js" async></script>
+    <script src="/static/frontend/search/autocomplete.aa04f3e4b63a.js" async></script>
+
+    
+
+<script>
+  var _cio = _cio || [];
+  (function(){
+      var a,b,c;a=function(f){return function(){_cio.push([f].
+      concat(Array.prototype.slice.call(arguments,0)))}};b=["load","identify",
+      "sidentify","track","page","on","off"];for(c=0;c<b.length;c++){_cio[b[c]]=a(b[c])};
+      var t = document.createElement('script'),
+          s = document.getElementsByTagName('script')[0];
+      t.async = true;
+      t.id    = 'cio-tracker';
+      t.setAttribute('data-site-id', '7c2f77c7758d22126955');
+      t.setAttribute('data-use-array-params', 'true');
+      t.setAttribute('data-in-app-org-id', '0ed756ae-4cd1-4bb7-912c-1b37e39b6595');
+      t.setAttribute('data-use-in-app', 'true');
+      t.src = 'https://assets.customer.io/assets/track.js';
+      s.parentNode.insertBefore(t, s);
+  })();
+  (function(){
+    try {
+      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    } catch (e) {
+      var tz = null;
+    }
+    var opts = {
+      
+      id: '0775b42a-8770-4ca9-b091-510be1d20e73',
+      created_at: 1779093672,
+      last_seen_at: 1779181582,
+      has_active_subscription: true,
+      first_name: '',
+    };
+    if (tz) {
+      opts.timezone = tz;
+    }
+    _cio.identify(opts);
+  })();
+</script>
+
+
+    
+<script id="profitwell-js" data-pw-auth="272a849342c819444089a848d31187be">
+  (function(i,s,o,g,r,a,m){i[o]=i[o]||function(){(i[o].q=i[o].q||[]).push(arguments)};
+  a=s.createElement(g);m=s.getElementsByTagName(g)[0];a.async=1;a.src=r+'?auth='+
+  s.getElementById(o+'-js').getAttribute('data-pw-auth');m.parentNode.insertBefore(a,m);
+  })(window,document,'profitwell','script','https://public.profitwell.com/js/profitwell.js');
+
+  profitwell('start', { 'user_email': 'alexmateus247@live.com' });
+</script>
+
+
+    
+    
+
+    
+
+
+
+    
+
+    
+<script>!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});</script>
+
+<script>
+window.Beacon('init', 'f6ddfa28-ffa8-423f-b3b1-50e29e420c43')
+
+Beacon("identify", {
+  email: "alexmateus247@live.com",
+  name: "alexmateus247",
+  has_active_subscription: "True",
+  username: "alexmateus247",
+  userid: "1639944"
+});
+</script>
+
+
+    
+
+
+
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fe26d732eefb16b',t:'MTc3OTE4NjYzOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
